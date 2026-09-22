@@ -493,6 +493,11 @@ For the hackathon demonstration:
 7. Return to the CallFlow AI dashboard and show the resulting activity/status.
 
 This demonstrates real data moving end-to-end through Fastn rather than only a frontend mockup.
+## Web dashboard 
+<img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/6173617d-6f40-4c98-946c-3f77d96ef8e6" />
+<img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/6453761a-5dbc-4aee-a37a-90a86bb80004" />
+<img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/36267f74-cc23-41de-b1e7-c0d99cbe4284" />
+<img width="960" height="504" alt="image" src="https://github.com/user-attachments/assets/0811b167-7cba-4357-9674-4717204fef2d" />
 
 ## Repository / Documentation Assets
 
