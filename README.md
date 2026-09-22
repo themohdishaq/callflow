@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CallFlow AI Dashboard
 
-## Getting Started
+A Next.js dashboard for tracking customer calls, lead intake, and post-call outcomes. The app is designed to surface a sales/operations workflow where customer calls can be monitored, outcomes logged, and follow-up actions managed from a single interface.
 
-First, run the development server:
+## Overview
+
+This project includes:
+
+- A customer overview dashboard with key operational stats
+- A lead capture flow for inbound customer requests
+- A call history view that reads stored call records
+- API routes for sending call outcomes and dashboard data to Fastn webhooks
+- Local in-memory fallback storage for development and testing when external webhooks are unavailable
+
+## Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+- Lucide React
+
+## Project Structure
+
+```bash
+app/
+  api/
+    call-outcome/
+    calls/
+    client/
+    dashboard/
+    history/
+    leads/
+  page.tsx
+components/
+lib/
+  call-store.ts
+public/
+```
+
+## Features
+
+### Customer and call workflow
+- Customer list and call activity view
+- Call lifecycle states for calling, connected, conversation, processing, and completed
+- Outcome tracking with sentiment and follow-up flags
+
+### Lead intake
+- Validates incoming lead data on the server
+- Submits lead payloads to Fastn for processing
+- Supports optional admin email forwarding
+
+### Dashboard data
+- Reads recent call history from the in-memory store
+- Falls back to local data when Fastn webhook configuration is missing or fails
+- Exposes summary metrics such as total calls, completed calls, escalated calls, and follow-ups
+
+## Local Development
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open the app in your browser:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Production Build
 
-## Learn More
+```bash
+npm run build
+npm run start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The app can work in local fallback mode without configuration, but external webhook integrations use environment variables such as:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+FASTN_WEBHOOK_URL=
+FASTN_HISTORY_WEBHOOK_URL=
+FASTN_CALL_OUTCOME_WEBHOOK=
+```
 
-## Deploy on Vercel
+If these are not provided, the app will continue to operate with local in-memory data for development/testing.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API Routes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### POST /api/leads
+Accepts customer lead data and submits it to the configured Fastn intake webhook.
+
+### POST /api/calls
+Stores and forwards call outcome data to a configured Fastn webhook.
+
+### GET /api/dashboard
+Returns recent call history and summary stats from Fastn or the local fallback store.
+
+## Notes
+
+This project currently uses an in-memory store for call records, which is useful for local development but not suitable for production persistence. For a production-grade deployment, you would typically replace this with a database-backed store or a durable workflow system.
+
+## License
+
+This project is currently unlicensed unless otherwise specified by the repository owner.
