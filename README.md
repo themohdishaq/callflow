@@ -17,6 +17,7 @@ When a prospective customer submits the form, the workflow:
 6. Returns a structured execution summary.
 
 The result is a simple end-to-end intake pipeline that removes manual copying, confirmation emails, and lead logging.
+<img width="375" height="458" alt="image" src="https://github.com/user-attachments/assets/8bf79e80-6bf6-4f55-b6d3-08a853de768a" />
 
 ## Workflow Architecture
 
@@ -50,6 +51,7 @@ Error                   Confirmation
 The implementation uses Fastn as the orchestration layer between the CallFlow AI frontend, Gmail, and Google Sheets.
 
 ## Sequence
+<img width="1171" height="457" alt="image" src="https://github.com/user-attachments/assets/c6da6bb5-6a1f-4000-a13b-2ebcd7db269d" />
 
 ```text
 CallFlow AI          Fastn Workflow             Gmail             Google Sheets
